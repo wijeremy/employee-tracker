@@ -1,6 +1,6 @@
 INSERT INTO departments (name)
 VALUES 
-    ('Upper Management')
+    ('Upper Management'),
     ('Sales'),
     ('HR'),
     ('IT'),
