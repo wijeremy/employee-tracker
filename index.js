@@ -67,15 +67,48 @@ const promptInit = () => {
 
 const viewDepartments = () => {
   db.query('SELECT id AS "ID", name AS "Deparment" FROM departments;', function (err, results) {
-    err? console.error(err) : console.table(results);
+    err? console.error(`Error: ${err}`) : console.table(results);
   });
 }
 
 const viewRoles = () => {
   db.query('SELECT r.id AS "ID", r.title AS "Job Title", d.name AS "Department" FROM roles r JOIN departments d ON r.department_id = d.id;', function (err, results) {
-    err? console.error(err) : console.table(results);
+    err? console.error(`Error: ${err}`) : console.table(results);
   });
 }
 
+const viewEmployees = () => {
+  db.query(`
+    SELECT 
+      e.id AS "ID", 
+      e.first_name AS "First Name",  
+      e.last_name AS "Last Name", 
+      r.title AS "Job Title", 
+      d.name AS "Department", 
+      r.salary as "Salary", 
+      m.first_name AS "Manager First Name", 
+      m.last_name AS "Manager Last Name" 
+    FROM employees e 
+    JOIN roles r ON e.role_id = r.id 
+    JOIN departments d ON r.department_id = d.id 
+    LEFT JOIN employees m ON e.manager_id = m.id;`, function (err, results) {
+    err? console.error(`Error: ${err}`) : console.table(results);
+  });
+}
 
+const promptNewDepartment = () => {
+  return inquirer.prompt([
+    {
+      type: 'input',
+      name: 'department',
+      message: 'What is the name of your new department?',
+    },
+  ])
+}
+
+const setNewDepartment = (department) => {
+  db.query(`INSERT INTO departments (name) VALUES (${department});`, function(err, results) {
+    err? console.error(`Error: ${err}`) : console.log('Department successfully added!')
+  })
+}
 
