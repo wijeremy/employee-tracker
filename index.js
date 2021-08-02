@@ -46,7 +46,7 @@ const initPrompts = [
     'Update and employee role'
 ]
 
-const getIndex = (arr, value) => {
+const indexOf = (arr, value) => {
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] === value) {
             return i;
@@ -112,3 +112,17 @@ const setNewDepartment = (department) => {
   })
 }
 
+const isNum = (input) => {
+  if (isNaN(input)) {
+    return 'Please provide a number'
+  }
+  return true
+}
+
+const promptNewRole = () => {
+  return inquirer.prompt([
+    {
+      type: 'input'
+    }
+  ])
+}
