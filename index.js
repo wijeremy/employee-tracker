@@ -43,7 +43,8 @@ const initPrompts = [
     'Add a department', 
     'Add a role', 
     'Add an employee', 
-    'Update and employee role'
+    'Update and employee role',
+    'Exit'
 ]
 
 const indexOf = (arr, value) => {
@@ -119,10 +120,24 @@ const isNum = (input) => {
   return true
 }
 
-const promptNewRole = () => {
+const promptNewRole = (departments) => {
   return inquirer.prompt([
     {
-      type: 'input'
+      type: 'input',
+      name: 'name',
+      message: 'What is the name of your new role?',
+    },
+    {
+      type: 'input',
+      name: 'salary',
+      message: 'What is the salary for this role?',
+      validate: isNum(input)
+    },
+    {
+      type: 'list',
+      name: 'department',
+      message: 'Which department will this role be in?',
+      choices: departments
     }
   ])
 }

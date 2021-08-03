@@ -48,6 +48,8 @@ const viewDepartments = () => {
     });
 }
 
+viewDepartments()
+
 const getDepartments = () => {
     return new Promise(async (resolve, reject) => {
         db.query('SELECT name FROM departments;', (err, results) => {
@@ -241,5 +243,27 @@ const updateEmployee = async () => {
 
     const chosenEmployeeIndex = indexOf(employees, result.employee);
     const employeeIdKey = Object.keys(employeeData[0])[0];
-    const employeeId = employeeData[chosenemployeeIndex][employeeIdKey];
+    const employeeId = employeeData[chosenEmployeeIndex][employeeIdKey];
+
+    db.query(`UDATE employees SET role_id = ${roleId} WHERE id = ${employeeId}`,
+        (err) => {
+            err? console.error(err) : console.log("Employee successfully updated!")
+        })
 }
+
+const promptDepartment = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'department',
+            message: 'What is the name of your new department?',
+        }
+    ])
+}
+
+const newDepartment = async () => {
+    const { department } = await promptDepartment();
+    db.query(`INSERT INTO departments (name) VALUES (${department})`)
+}
+
+// newDepartment()

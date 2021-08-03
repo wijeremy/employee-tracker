@@ -1,7 +1,8 @@
-const inquierer = require('inquirer')
+const express = require('express')
 // Import and require mysql2
 const mysql = require('mysql2');
-require('console.table')
+
+const {init} = require('./utilities/index')
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -36,3 +37,5 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+init();
