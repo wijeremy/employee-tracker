@@ -2,7 +2,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 [View the repository for this app](https://github.com/wijeremy/employee-tracker)
-[Check out this neat video demonstrating my app]()
+
+[Check out this neat video demonstrating my app](https://www.youtube.com/watch?v=ATeYO2EZX_s&ab_channel=HermeticHippie)
 ## Description
 I built this project to practice using sql datases, queries, and to implement them in a real world use case.
 This app allows a company to view and update their employee, roles, and departments records. It saves all these records in a database for future use. 
