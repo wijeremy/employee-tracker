@@ -3,7 +3,7 @@ const express = require('express')
 const mysql = require('mysql2');
 const inquirer = require("inquirer")
 require('dotenv').config();
-const util = require('util')
+
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -40,27 +40,26 @@ const viewDepartments = () => {
     });
 }
 
-const getDepartments = () => {
-    db.query('SELECT id AS "ID", name AS "Deparment" FROM departments;', function (err, results) {
-        if(err){
-            throw err;
-        }
-        let department = Object.keys(results[0])[1];
-        let arr = []
-        for (let i = 0; i < results.length; i++){
-            arr.push(results[i][department]);
-        }
-        console.log(arr)
-    });
+const getDeparments = () => {
+    return new Promise(async (resolve, reject) => {
+        db.query('SELECT id AS "ID", name AS "Deparment" FROM departments;', function (err, results) {
+            if(err){
+                reject(err)
+            }
+            let department = Object.keys(results[0])[1];
+            let arr = []
+            for (let i = 0; i < results.length; i++){
+                arr.push(results[i][department]);
+            }
+            resolve(arr)
+        });
+    })
 }
 
-getDepartments()
-// const promiseDepartments = util.promisify(getDepartments)
-// const tryMe = async () => {
-//     console.log('getting promise:')
-//     const results = await promiseDepartments()
-//     console.log(`Here you go: ${results}`)
-// }
+const tryMe = async () => {
+    console.log('getting promise:')
+    const results = await getDepartments()
+    console.log(`Here you go: ${results}`)
+}
 
-// tryMe()
-
+tryMe()
