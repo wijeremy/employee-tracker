@@ -7,31 +7,38 @@ const {addRole} = require('./add_role')
 const {updateEmployee} = require('./update_employee')
 const {promptInit} = require('./prompt_init')
 require('dotenv').config();
-const {db} = require('../config/connection')
+const {db} = require('../connection')
 
 const init = async () => {
     let {request} = await promptInit();
     switch (request) {
         case 'View all departments':
             await viewDepartments();
+            init();
             break;
         case 'View all roles':
             await viewRoles();
+            init();
             break;
         case 'View all employees':
             await viewEmployees();
+            init();
             break;
         case 'Add a department':
-            await addDepartment;
+            await addDepartment();
+            init();
             break;
         case 'Add a role':
-            await addEmployee();
+            await addRole();
+            init();
             break;
         case 'Add an employee':
-            await addRole();
+            await addEmployee();
+            init();
             break;
         case 'Update and employee role':
             await updateEmployee();
+            init();
             break;
         case 'Exit':
             process.exit();
@@ -41,9 +48,8 @@ const init = async () => {
             break;
             
     }
-    init();
 }
 
-init();
+// init();
 
 module.exports = {init}

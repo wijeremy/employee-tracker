@@ -1,5 +1,5 @@
 require('dotenv').config();
-const {db} = require('../config/connection')
+const {db} = require('../connection')
 
 const indexOf = (arr, value) => {
     for (let i = 0; i < arr.length; i++) {

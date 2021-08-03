@@ -1,9 +1,23 @@
 require('dotenv').config();
-const {db} = require('../config/connection')
+const {db} = require('../connection')
 
 const viewDepartments = () => {
     db.query('SELECT id AS "ID", name AS "Deparment" FROM departments;', function (err, results) {
-      err? console.error(`Error: ${err}`) : console.table(results);
+      if (err) {
+        throw err
+      }
+      console.log (
+        `
+
+-------- Here are your departments -----------
+        `
+      )
+      console.table(results)
+      console.log(
+        `
+press up or down to continue
+        `
+      )
     });
 }
 

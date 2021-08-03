@@ -1,5 +1,5 @@
 require('dotenv').config();
-const {db} = require('../config/connection')
+const {db} = require('../connection')
 
 const viewEmployees = () => {
     db.query(`
@@ -15,9 +15,25 @@ const viewEmployees = () => {
       FROM employees e 
       JOIN roles r ON e.role_id = r.id 
       JOIN departments d ON r.department_id = d.id 
-      LEFT JOIN employees m ON e.manager_id = m.id;`, function (err, results) {
-      err? console.error(`Error: ${err}`) : console.table(results);
-    });
+      LEFT JOIN employees m ON e.manager_id = m.id;`, 
+      (err, results) => {
+        if (err) {
+          throw err
+        }
+        console.log (
+          `
+
+-------- Here are your employees -----------
+          `
+        )
+        console.table(results);
+        console.log(
+          `
+press up or down to continue
+          `
+        )
+      }
+    );
   }
 
 module.exports = {viewEmployees}

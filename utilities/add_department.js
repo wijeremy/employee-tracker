@@ -1,6 +1,6 @@
 const inquirer = require('inquirer')
 require('dotenv').config();
-const {db} = require('../config/connection')
+const {db} = require('../connection')
 
 const promptDepartment = () => {
     return inquirer.prompt([
@@ -14,7 +14,12 @@ const promptDepartment = () => {
 
 const addDepartment = async () => {
     const { department } = await promptDepartment();
-    db.query(`INSERT INTO departments (name) VALUES (${department})`)
+    db.query(`INSERT INTO departments (name) VALUES ("${department}");`, 
+    (err) => {
+        err? console.log(err) : console.log('Department successfully added!')
+    })
 }
+
+// addDepartment()
 
 module.exports = {addDepartment}

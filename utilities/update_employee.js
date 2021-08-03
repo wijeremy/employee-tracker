@@ -7,7 +7,7 @@ const {
 
 const inquirer = require('inquirer')
 require('dotenv').config();
-const {db} = require('../config/connection')
+const {db} = require('../connection')
 
 const promptUpdate = (employees, roles) => {
     return inquirer.prompt([
@@ -33,7 +33,7 @@ const updateEmployee = async () => {
     const rolesData = await getRoles();
     const roles = arrayRoles(rolesData);
 
-    const result = promptUpdate(employees, roles);
+    const result = await promptUpdate(employees, roles);
 
     const chosenRoleIndex = indexOf(roles, result.role);
     const roleIdKey = Object.keys(rolesData[0])[0];
@@ -43,7 +43,7 @@ const updateEmployee = async () => {
     const employeeIdKey = Object.keys(employeeData[0])[0];
     const employeeId = employeeData[chosenEmployeeIndex][employeeIdKey];
 
-    db.query(`UDATE employees SET role_id = ${roleId} WHERE id = ${employeeId}`,
+    db.query(`UPDATE employees SET role_id = ${roleId} WHERE id = ${employeeId};`,
         (err) => {
             err? console.error(err) : console.log("Employee successfully updated!")
         })
