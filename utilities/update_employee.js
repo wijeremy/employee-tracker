@@ -44,7 +44,10 @@ const updateEmployee = async () => {
 
     db.query(`UPDATE employees SET role_id = ${roleId} WHERE id = ${employeeId};`,
         (err) => {
-            err? console.error(err) : console.log("Employee successfully updated!")
+            err? console.log(err) : console.log(`
+------------------------------       
+Employee successfully Updated!
+------------------------------`)
         })
 }
 
