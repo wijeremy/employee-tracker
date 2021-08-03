@@ -6,8 +6,6 @@ const {addEmployee} = require('./add_employee')
 const {addRole} = require('./add_role')
 const {updateEmployee} = require('./update_employee')
 const {promptInit} = require('./prompt_init')
-require('dotenv').config();
-const {db} = require('../connection')
 
 const init = async () => {
     let {request} = await promptInit();

@@ -1,5 +1,4 @@
 const inquirer = require('inquirer')
-require('dotenv').config();
 const {db} = require('../connection')
 
 const promptDepartment = () => {
@@ -16,7 +15,10 @@ const addDepartment = async () => {
     const { department } = await promptDepartment();
     db.query(`INSERT INTO departments (name) VALUES ("${department}");`, 
     (err) => {
-        err? console.log(err) : console.log('Department successfully added!')
+        err? console.log(err) : console.log(`
+------------------------------        
+Department successfully added!
+------------------------------`)
     })
 }
 

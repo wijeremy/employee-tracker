@@ -1,4 +1,3 @@
-require('dotenv').config();
 const {db} = require('../connection')
 
 const viewEmployees = () => {

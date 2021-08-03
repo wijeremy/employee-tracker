@@ -6,7 +6,6 @@ const {
     arrayRoles} = require('./utilities')
 
 const inquirer = require('inquirer')
-require('dotenv').config();
 const {db} = require('../connection')
 
 const promptEmployee = async (roles, managers) => {
@@ -56,7 +55,10 @@ const addEmployee = async () => {
     db.query(`INSERT INTO employees (first_name, last_name, role_id, manager_id) 
         VALUES ("${result.first_name}", "${result.last_name}", ${roleId}, ${managerId});`, 
         (err) => {
-            err? console.error(err) : console.log("Employee successfully added!")
+        err? console.log(err) : console.log(`
+-----------------------------        
+Employee successfully added!
+-----------------------------`)
         })
 }
 

@@ -6,7 +6,6 @@ const {
     arrayRoles} = require('./utilities')
 
 const inquirer = require('inquirer')
-require('dotenv').config();
 const {db} = require('../connection')
 
 const promptUpdate = (employees, roles) => {

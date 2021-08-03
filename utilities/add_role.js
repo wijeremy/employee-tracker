@@ -1,5 +1,4 @@
 const inquirer = require('inquirer')
-require('dotenv').config();
 const {db} = require('../connection')
 
 const getDepartments = () => {
@@ -67,7 +66,10 @@ const addRole = async () => {
     const { title, salary, department } = results;
     const departmentId = await getDepartmentId(department)
     db.query(`INSERT INTO roles (title, salary, department_id) VALUES ("${title}", ${salary}, ${departmentId});`, (err) => {
-        err? console.error(err) : console.log("New role successfully created!")
+        err? console.log(err) : console.log(`
+--------------------------       
+Role successfully added!
+--------------------------`)
     })
 }
 
