@@ -22,6 +22,5 @@ Department successfully added!
     })
 }
 
-// addDepartment()
 
 module.exports = {addDepartment}
